@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Function Tester</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        input, button { margin: 5px; padding: 8px; }
+        button { background: rgb(4, 247, 146); color: white; border: none; cursor: pointer; }
+        button:hover { background: rgb(0, 114, 66); }
+        .container { max-width: 500px; margin: auto; }
+        .output { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Test JavaScript Functions</h2>
+
+    <div class="container">
+        <!-- Reverse String -->
+        <h3>Reverse a String</h3>
+        <input type="text" id="strInput" placeholder="Enter text">
+        <button onclick="testReverseString()">Reverse</button>
+        <p class="output" id="reverseResult"></p>
+
+        <!-- Count Characters -->
+        <h3>Count Characters</h3>
+        <input type="text" id="charInput" placeholder="Enter text">
+        <button onclick="testCountCharacters()">Count</button>
+        <p class="output" id="charResult"></p>
+
+        <!-- Capitalize Words -->
+        <h3>Capitalize Words</h3>
+        <input type="text" id="capInput" placeholder="Enter sentence">
+        <button onclick="testCapitalizeWords()">Capitalize</button>
+        <p class="output" id="capResult"></p>
+
+        <!-- Find Max & Min -->
+        <h3>Find Max & Min</h3>
+        <input type="text" id="arrayInput" placeholder="Enter numbers (comma separated)">
+        <button onclick="testFindMaxMin()">Find</button>
+        <p class="output" id="maxMinResult"></p>
+
+        <!-- Sum of Array -->
+        <h3>Sum of Array</h3>
+        <input type="text" id="sumArrayInput" placeholder="Enter numbers (comma separated)">
+        <button onclick="testSumArray()">Sum</button>
+        <p class="output" id="sumResult"></p>
+
+        <!-- Factorial -->
+        <h3>Factorial</h3>
+        <input type="number" id="factInput" placeholder="Enter a number">
+        <button onclick="testFactorial()">Calculate</button>
+        <p class="output" id="factResult"></p>
+
+        <!-- Prime Number -->
+        <h3>Check Prime Number</h3>
+        <input type="number" id="primeInput" placeholder="Enter a number">
+        <button onclick="testPrime()">Check</button>
+        <p class="output" id="primeResult"></p>
+
+        <!-- Fibonacci -->
+        <h3>Fibonacci Sequence</h3>
+        <input type="number" id="fiboInput" placeholder="Enter terms count">
+        <button onclick="testFibonacci()">Generate</button>
+        <p class="output" id="fiboResult"></p>
+    </div>
+
+    <script>
+        // Reverse a String
+        function reverseString(str) {
+            return str.split("").reverse().join("");
+        }
+        function testReverseString() {
+            let input = document.getElementById("strInput").value;
+            document.getElementById("reverseResult").innerText = "Reversed: " + reverseString(input);
+        }
+
+        // Count Characters
+        function countCharacters(str) {
+            return str.length;
+        }
+        function testCountCharacters() {
+            let input = document.getElementById("charInput").value;
+            document.getElementById("charResult").innerText = "Characters: " + countCharacters(input);
+        }
+
+        // Capitalize Words
+        function capitalizeWords(sentence) {
+            return sentence.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+        }
+        function testCapitalizeWords() {
+            let input = document.getElementById("capInput").value;
+            document.getElementById("capResult").innerText = "Capitalized: " + capitalizeWords(input);
+        }
+
+        // Find Max & Min
+        function findMax(arr) { return Math.max(...arr); }
+        function findMin(arr) { return Math.min(...arr); }
+        function testFindMaxMin() {
+            let input = document.getElementById("arrayInput").value.split(",").map(Number);
+            document.getElementById("maxMinResult").innerText = `Max: ${findMax(input)}, Min: ${findMin(input)}`;
+        }
+
+        // Sum of Array
+        function sumArray(arr) {
+            return arr.reduce((sum, num) => sum + num, 0);
+        }
+        function testSumArray() {
+            let input = document.getElementById("sumArrayInput").value.split(",").map(Number);
+            document.getElementById("sumResult").innerText = "Sum: " + sumArray(input);
+        }
+
+        // Factorial
+        function factorial(n) {
+            if (n === 0 || n === 1) return 1;
+            return n * factorial(n - 1);
+        }
+        function testFactorial() {
+            let input = parseInt(document.getElementById("factInput").value);
+            document.getElementById("factResult").innerText = "Factorial: " + factorial(input);
+        }
+
+        // Prime Number Check
+        function isPrime(n) {
+            if (n < 2) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+        function testPrime() {
+            let input = parseInt(document.getElementById("primeInput").value);
+            document.getElementById("primeResult").innerText = isPrime(input) ? "✅ Prime" : "❌ Not Prime";
+        }
+
+        // Fibonacci Sequence
+        function fibonacci(n) {
+            let sequence = [0, 1];
+            for (let i = 2; i < n; i++) {
+                sequence.push(sequence[i - 1] + sequence[i - 2]);
+            }
+            return sequence.slice(0, n);
+        }
+        function testFibonacci() {
+            let input = parseInt(document.getElementById("fiboInput").value);
+            document.getElementById("fiboResult").innerText = "Fibonacci: " + fibonacci(input).join(", ");
+        }
+    </script>
+
+</body>
+</html>
